@@ -23,20 +23,19 @@ export default {
     }
   },
   methods: {
-    HandelLogin () {
-      this.$http.post('login', this.formData).then(res => {
-        // ES6对象解构赋值
-        const {meta: {msg, status}} = res.data
-        if (status === 200) {
-          this.$message({
-            message: '恭喜你，这是一条成功消息',
-            type: 'success'
-          })
-          this.$router.push({name: 'Home'})
-        } else {
-          this.$message.error(msg)
-        }
-      })
+    async HandelLogin () {
+      const res = await this.$http.post('login', this.formData)
+      // ES6对象解构赋值
+      const {meta: {msg, status}} = res.data
+      if (status === 200) {
+        this.$message({
+          message: '恭喜你，这是一条成功消息',
+          type: 'success'
+        })
+        this.$router.push({name: 'Home'})
+      } else {
+        this.$message.error(msg)
+      }
     }
   }
 }
